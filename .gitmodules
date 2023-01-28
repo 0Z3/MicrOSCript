@@ -1,0 +1,9 @@
+[submodule "lib/libose"]
+	path = lib/libose
+	url = https://github.com/0Z3/libose
+[submodule "lib/o.se.stdlib"]
+	path = lib/o.se.stdlib
+	url = https://github.com/0Z3/o.se.stdlib
+[submodule "lib/o.se.oscript"]
+	path = lib/o.se.oscript
+	url = https://github.com/0Z3/o.se.oscript
