@@ -40,6 +40,7 @@ extern "C" {
 
 #define OSE_LINK_MODULES
 #define OSCRIPT_NOPARSER
+#define OSE_MEMPROFILE
 
 /**
    VM bundle sizes
@@ -68,6 +69,11 @@ extern "C" {
 #define OSE_CONF_VM_DUMP_SIZE 8192
 #endif
 
+#define OSEVM_EVALTYPE uoscript_evalType 
+#define OSE_GETPAYLOADITEMLENGTH_HOOK osevm_getPayloadItemLength_hook
+#define OSE_GETPAYLOADITEMSIZE_HOOK osevm_getPayloadItemSize_hook
+#define OSE_PPRINTPAYLOADITEM_HOOK osevm_pprintPayloadItem_hook 
+
 /**
    VM hooks
  
@@ -79,9 +85,9 @@ extern "C" {
 /* #define OSEVM_ASSIGN my_assign */
 /* #endif */
 
-/* #ifndef OSEVM_LOOKUP */
-/* #define OSEVM_LOOKUP my_lookup */
-/* #endif */
+#ifndef OSEVM_LOOKUP
+#define OSEVM_LOOKUP uoscript_lookup
+#endif
 
 /* #ifndef OSEVM_FUNCALL */
 /* #define OSEVM_FUNCALL my_funcall */
@@ -175,41 +181,24 @@ extern "C" {
  Uncomment these to provide support for different nonstandard OSC
  types
  */
-/* define OSE_CONF_PROVIDE_TYPE_SYMBOL */
-/* define OSE_CONF_PROVIDE_TYPE_DOUBLE */
-/* define OSE_CONF_PROVIDE_TYPE_INT8 */
-/* define OSE_CONF_PROVIDE_TYPE_UINT8 */
-/* define OSE_CONF_PROVIDE_TYPE_UINT32 */
-/* define OSE_CONF_PROVIDE_TYPE_INT64 */
-/* define OSE_CONF_PROVIDE_TYPE_UINT64 */
-/* define OSE_CONF_PROVIDE_TYPE_TYPETAG */
-/* define OSE_CONF_PROVIDE_TYPE_TRUE */
-/* define OSE_CONF_PROVIDE_TYPE_FALSE */
-/* define OSE_CONF_PROVIDE_TYPE_NULL */
-/* define OSE_CONF_PROVIDE_TYPE_INFINITUM */
+/* #define OSE_CONF_PROVIDE_TYPE_SYMBOL */
+/* #define OSE_CONF_PROVIDE_TYPE_DOUBLE */
+/* #define OSE_CONF_PROVIDE_TYPE_INT8 */
+/* #define OSE_CONF_PROVIDE_TYPE_UINT8 */
+/* #define OSE_CONF_PROVIDE_TYPE_UINT32 */
+/* #define OSE_CONF_PROVIDE_TYPE_INT64 */
+/* #define OSE_CONF_PROVIDE_TYPE_UINT64 */
+#define OSE_CONF_PROVIDE_TYPE_TIMETAG
+/* #define OSE_CONF_PROVIDE_TYPE_TRUE */
+/* #define OSE_CONF_PROVIDE_TYPE_FALSE */
+/* #define OSE_CONF_PROVIDE_TYPE_NULL */
+/* #define OSE_CONF_PROVIDE_TYPE_INFINITUM */
 
 /**
    Debug is significantly slower, but provides a number of features 
    that can help track down problems.
 */
 /* #define OSE_CONF_DEBUG */
-
-/**
-   The address of anonymous values. When a value is pushed onto the
-   stack with a function like #ose_pushInt32(), it goes on as a
-   message with a default message, which can be set here. By
-   default, the message is empty.
-  
-   In order to define your own default, you must explicitly pad the
-   address with enough NULL bytes to make it a multiple of 4 (for
-   example: "/x\0\0", or "/foobar\0"). OSE_CONF_ADDRESS_ANONVAL_LEN
-   refers to the number of non-NULL bytes, and
-   OSE_CONF_ADDRESS_ANONVAL_SIZE is the full length of the padded
-   address (multiple of 4 bytes).
-*/
-/* #define OSE_CONF_ADDRESS_ANONVAL "/\0\0\0" */
-/* #define OSE_CONF_ADDRESS_ANONVAL_LEN 1 */
-/* #define OSE_CONF_ADDRESS_ANONVAL_SIZE 4 */
 
 /**
    Uncomment this to disable the stdlib.
