@@ -17,11 +17,12 @@ private:
     char *udp_buffer;
 
     IPAddress wifi_ip_address;
+    int wifi_connected = false;
     unsigned int udp_port;
 
-public:
     WiFiUDP udp;
 
+public:
     void init(int32_t vm_x_size
               = MICROSCRIPT_VMX_SIZE);
     void init(const char * const ssid,
@@ -36,6 +37,9 @@ public:
               int32_t vm_x_size
               = MICROSCRIPT_VMX_SIZE);
 
+    String wifiIPAddress(void);
+    int32_t udpPort(void);
+    
     uint64_t serviceInterrupts(void);
     void attachInterruptTo(int pin, int direction);
 

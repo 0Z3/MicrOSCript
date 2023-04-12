@@ -232,6 +232,7 @@ void MicrOSCriptESP32::connectToWiFi(const char *ssid,
                                        const char *pass)
 {
     WiFi.disconnect(true);
+    wifi_connected = false;
     WiFi.onEvent(wiFiEventHandler);
     WiFi.begin(ssid, pass);
     while(WiFi.waitForConnectResult() != WL_CONNECTED)
@@ -241,8 +242,14 @@ void MicrOSCriptESP32::connectToWiFi(const char *ssid,
         ESP.restart();
     }
     wifi_ip_address = WiFi.localIP();
+    wifi_connected = true;
     ESP_LOGI(TAG, "Connected! IP address: %s",
              wifi_ip_address.toString().c_str());
+}
+
+String MicrOSCriptESP32::wifiIPAddress(void)
+{
+    return wifi_ip_address.toString();
 }
 
 /************************************************************
@@ -316,6 +323,11 @@ static void udpSendTo(ose_bundle osevm)
     addr.fromString(ose_peekString(vm_s));
     ose_drop(vm_s);
     o->udpSendElemTo(addr, (uint16_t)port, vm_s);
+}
+
+int32_t MicrOSCriptESP32::udpPort(void)
+{
+    return udp_port;
 }
 
 /************************************************************
