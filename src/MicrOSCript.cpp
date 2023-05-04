@@ -69,7 +69,7 @@ void uoscript_lookup(ose_bundle osevm)
 
     if(explicitbndl)
     {
-        int32_t mo = ose_getFirstOffsetForMatch(bndlenv, address);
+        int32_t mo = ose_getFirstOffsetForMatch(bndlenv, address + 3);
         if(mo >= OSE_BUNDLE_HEADER_LEN)
         {
             ose_drop(vm_s);
