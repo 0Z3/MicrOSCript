@@ -23,13 +23,14 @@ public:
     void init(int32_t vm_x_size
               = MICROSCRIPT_VMX_SIZE);
 
-    ose_bundle input(void) {return vm_i;};
-    ose_bundle stack(void) {return vm_s;};
-    ose_bundle env(void) {return vm_e;};
-    ose_bundle control(void) {return vm_c;};
-    ose_bundle dump(void) {return vm_d;};
-    ose_bundle x(void) {return vm_x;};
-    ose_bundle stdlib(void) {return vm_l;};
+    ose_bundle vm(void) {return osevm;}
+    ose_bundle input(void) {return vm_i;}
+    ose_bundle stack(void) {return vm_s;}
+    ose_bundle env(void) {return vm_e;}
+    ose_bundle control(void) {return vm_c;}
+    ose_bundle dump(void) {return vm_d;}
+    ose_bundle x(void) {return vm_x;}
+    ose_bundle stdlib(void) {return vm_l;}
 
     void eval(void);
     void bindfn(ose_bundle bundle,
